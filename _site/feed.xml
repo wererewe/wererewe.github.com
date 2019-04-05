@@ -1,4 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-03T17:57:08+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">경진 블로그</title><subtitle>공부용 블로그</subtitle><author><name>kyungjin</name></author><entry><title type="html">첫 포스팅</title><link href="http://localhost:4000/dev/initial-post/" rel="alternate" type="text/html" title="첫 포스팅" /><published>2019-04-02T00:00:00+09:00</published><updated>2019-04-02T00:00:00+09:00</updated><id>http://localhost:4000/dev/initial-post</id><content type="html" xml:base="http://localhost:4000/dev/initial-post/">&lt;p&gt;처음 써본당!&lt;/p&gt;</content><author><name>kyungjin</name></author><summary type="html">처음 써본당!</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/welcome-to-jekyll/" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-03-18T15:24:00+09:00</published><updated>2019-03-18T15:24:00+09:00</updated><id>http://localhost:4000/jekyll/update/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/welcome-to-jekyll/">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-04T19:45:53+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">경진 블로그</title><subtitle>공부용 블로그</subtitle><author><name>kyungjin</name></author><entry><title type="html">첫 포스팅</title><link href="http://localhost:4000/dev/initial-post/" rel="alternate" type="text/html" title="첫 포스팅" /><published>2019-04-02T00:00:00+09:00</published><updated>2019-04-02T00:00:00+09:00</updated><id>http://localhost:4000/dev/initial-post</id><content type="html" xml:base="http://localhost:4000/dev/initial-post/">&lt;p&gt;처음 써본당!&lt;/p&gt;
+&lt;h1 id=&quot;this-is-an-h1-tag&quot;&gt;This is an &amp;lt;h1&amp;gt; tag&lt;/h1&gt;
+&lt;h2 id=&quot;this-is-an-h2-tag&quot;&gt;This is an &amp;lt;h2&amp;gt; tag&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;italic&lt;/em&gt;
+&lt;em&gt;italic&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;bold&lt;/strong&gt;
+&lt;strong&gt;bold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;You &lt;strong&gt;can&lt;/strong&gt; combine them&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2
+    &lt;ul&gt;
+      &lt;li&gt;Item 2a&lt;/li&gt;
+      &lt;li&gt;Item 2b&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+  &lt;li&gt;Item 3
+    &lt;ol&gt;
+      &lt;li&gt;Item 3a&lt;/li&gt;
+      &lt;li&gt;Item 3b&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Blockquotes
+Blockquotes&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Inline code&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'hi'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;del&gt;Strikethrough&lt;/del&gt;&lt;/p&gt;</content><author><name>kyungjin</name></author><summary type="html">처음 써본당! This is an &amp;lt;h1&amp;gt; tag This is an &amp;lt;h2&amp;gt; tag</summary></entry><entry><title type="html">TypeScript - 고급 타입</title><link href="http://localhost:4000/dev/typescript-1/" rel="alternate" type="text/html" title="TypeScript - 고급 타입" /><published>2019-04-02T00:00:00+09:00</published><updated>2019-04-02T00:00:00+09:00</updated><id>http://localhost:4000/dev/typescript-1</id><content type="html" xml:base="http://localhost:4000/dev/typescript-1/">&lt;h2 id=&quot;공용체union&quot;&gt;공용체(Union)&lt;/h2&gt;
+&lt;p&gt;2개 이상의 타입을 조합하는 표현식.
+공용체는 &lt;code class=&quot;highlighter-rouge&quot;&gt;파이프 기호(|)&lt;/code&gt;를 사용한다.&lt;/p&gt;</content><author><name>kyungjin</name></author><summary type="html">공용체(Union) 2개 이상의 타입을 조합하는 표현식. 공용체는 파이프 기호(|)를 사용한다.</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/welcome-to-jekyll/" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-03-18T15:24:00+09:00</published><updated>2019-03-18T15:24:00+09:00</updated><id>http://localhost:4000/jekyll/update/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/welcome-to-jekyll/">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
 &lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
