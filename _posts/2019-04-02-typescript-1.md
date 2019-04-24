@@ -6,14 +6,6 @@ tags: [ blog, typescript]
 ---
 
 ## 공용체(Union)
-2개 이상의 타입을 조합하는 표현식.
-공용체는 `파이프 기호(|)`를 사용한다.
+2개 이상의 타입을 조합하는 표현식.  
+공용체는 `파이프 기호(|)`를 사용한다.  
 
-
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
