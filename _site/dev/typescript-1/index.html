@@ -5,18 +5,18 @@
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
 -->
-<html lang="en" class="no-js">
+<html lang="ko" class="no-js">
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>TypeScript - 고급 타입 - 경진 블로그</title>
+<!-- begin _includes/seo.html --><title>TypeScript - 고급 타입 - wererewe 기술 블로그</title>
 <meta name="description" content="공용체(Union)2개 이상의 타입을 조합하는 표현식.공용체는 파이프 기호(|)를 사용한다.">
 
 
 
 <meta property="og:type" content="article">
-<meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="경진 블로그">
+<meta property="og:locale" content="ko">
+<meta property="og:site_name" content="wererewe 기술 블로그">
 <meta property="og:title" content="TypeScript - 고급 타입">
 <meta property="og:url" content="http://localhost:4000/dev/typescript-1/">
 
@@ -52,7 +52,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "경진",
+      "name": "wererewe",
       "url": "http://localhost:4000",
       "sameAs": null
     }
@@ -67,7 +67,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="경진 블로그 Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="wererewe 기술 블로그 Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -117,17 +117,17 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-        <a class="site-title" href="/">경진 블로그</a>
+        <a class="site-title" href="/">wererewe 기술 블로그</a>
         <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/list" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
               <a href="/" >Home</a>
-            </li><li class="masthead__menu-item">
-              <a href="/collection-archive/" >Collections</a>
-            </li><li class="masthead__menu-item">
-              <a href="/sitemap/" >Sitemap</a>
             </li></ul>
         
         <button class="greedy-nav__toggle hidden" type="button">
-          <span class="visually-hidden">Toggle menu</span>
+          <span class="visually-hidden">토글 메뉴</span>
           <div class="navicon"></div>
         </button>
         <ul class="hidden-links hidden"></ul>
@@ -164,7 +164,7 @@
   </div>
 
   <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">Follow</button>
+    <button class="btn btn--inverse">팔로우</button>
     <ul class="author__urls social-icons">
       
         <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
@@ -260,7 +260,7 @@
 
 
 
-  less than 1 minute read
+  최대 1 분 소요
 </p>
           
         </header>
@@ -272,6 +272,11 @@
 <p>2개 이상의 타입을 조합하는 표현식.
 공용체는 <code class="highlighter-rouge">파이프 기호(|)</code>를 사용한다.</p>
 
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
 
         
       </section>
@@ -279,6 +284,29 @@
       <footer class="page__meta">
         
         
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#blog" class="page__taxonomy-item" rel="tag">blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#typescript" class="page__taxonomy-item" rel="tag">typescript</a>
+    
+    </span>
+  </p>
+
+
 
 
   
@@ -289,7 +317,7 @@
   
 
   <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
     <span itemprop="keywords">
     
       
@@ -301,20 +329,20 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-04-02T00:00:00+09:00">April 02, 2019</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2019-04-02T00:00:00+09:00">April 02, 2019</time></p>
         
       </footer>
 
       <section class="page__share">
   
-    <h4 class="page__share-title">Share on</h4>
+    <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=TypeScript+-+%EA%B3%A0%EA%B8%89+%ED%83%80%EC%9E%85%20http%3A%2F%2Flocalhost%3A4000%2Fdev%2Ftypescript-1%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=TypeScript+-+%EA%B3%A0%EA%B8%89+%ED%83%80%EC%9E%85%20http%3A%2F%2Flocalhost%3A4000%2Fdev%2Ftypescript-1%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdev%2Ftypescript-1%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdev%2Ftypescript-1%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdev%2Ftypescript-1%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdev%2Ftypescript-1%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -322,10 +350,10 @@
   <nav class="pagination">
     
       <a href="/dev/initial-post/" class="pagination--pager" title="첫 포스팅
-">Previous</a>
+">이전</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="#" class="pagination--pager disabled">다음</a>
     
   </nav>
 
@@ -359,7 +387,7 @@ s.setAttribute('data-timestamp', +new Date());
   
   
     <div class="page__related">
-      <h4 class="page__related-title">You may also enjoy</h4>
+      <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
         
           
@@ -367,21 +395,21 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 <div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/dev/initial-post/" rel="permalink">첫 포스팅
+        <a href="http://localhost:4000/dev/initial-post/" rel="permalink">첫 포스팅
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
 
 
 
 
-  less than 1 minute read
+  최대 1 분 소요
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">처음 써본당!
@@ -391,34 +419,32 @@ This is an &lt;h2&gt; tag
 </p>
   </article>
 </div>
-
         
           
 
 
 
 <div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/jekyll/update/welcome-to-jekyll/" rel="permalink">Welcome to Jekyll!
+        <a href="http://localhost:4000/jekyll/update/welcome-to-jekyll/" rel="permalink">Welcome to Jekyll!
 </a>
       
     </h2>
     
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
 
 
 
 
-  less than 1 minute read
+  최대 1 분 소요
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...</p>
   </article>
 </div>
-
         
       </div>
     </div>
@@ -438,7 +464,7 @@ This is an &lt;h2&gt; tag
         <div class="page__footer-follow">
   <ul class="social-icons">
     
-      <li><strong>Follow:</strong></li>
+      <li><strong>팔로우:</strong></li>
     
 
     
@@ -449,11 +475,11 @@ This is an &lt;h2&gt; tag
       
     
 
-    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2019 경진. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2019 wererewe. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

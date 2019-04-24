@@ -2,8 +2,7 @@
 layout: single
 title:  "TypeScript - 고급 타입"
 categories: dev
-commnets: true
-#tags: [ blog, typescript]
+tags: [ blog, typescript]
 ---
 
 ## 공용체(Union)
@@ -11,3 +10,10 @@ commnets: true
 공용체는 `파이프 기호(|)`를 사용한다.
 
 
+{% highlight ruby %}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}

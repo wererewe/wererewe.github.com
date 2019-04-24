@@ -2,7 +2,7 @@
 layout: single
 title:  "첫 포스팅"
 categories: dev
-#tags: [ blog, typescript]
+tags: [ blog, typescript]
 ---
 처음 써본당!
 # This is an <h1> tag
@@ -39,3 +39,11 @@ function hi() {
 ```
 
 ~~Strikethrough~~
+
+{% highlight ruby %}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
