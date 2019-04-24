@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>TypeScript - 고급 타입 - wererewe 기술 블로그</title>
-<meta name="description" content="공용체(Union)2개 이상의 타입을 조합하는 표현식.공용체는 파이프 기호(|)를 사용한다.">
+<meta name="description" content="공용체(Union)2개 이상의 타입을 조합하는 표현식.공용체는 파이프 기호(|)를 사용한다.var unionType: string | number;위 예제의 unionType에는 string과 number 타입의 값을 할당할 수 있다.">
 
 
 
@@ -21,7 +21,7 @@
 <meta property="og:url" content="http://localhost:4000/dev/typescript-1/">
 
 
-  <meta property="og:description" content="공용체(Union)2개 이상의 타입을 조합하는 표현식.공용체는 파이프 기호(|)를 사용한다.">
+  <meta property="og:description" content="공용체(Union)2개 이상의 타입을 조합하는 표현식.공용체는 파이프 기호(|)를 사용한다.var unionType: string | number;위 예제의 unionType에는 string과 number 타입의 값을 할당할 수 있다.">
 
 
 
@@ -245,7 +245,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="TypeScript - 고급 타입">
-    <meta itemprop="description" content="공용체(Union)2개 이상의 타입을 조합하는 표현식.공용체는 파이프 기호(|)를 사용한다.">
+    <meta itemprop="description" content="공용체(Union)2개 이상의 타입을 조합하는 표현식.공용체는 파이프 기호(|)를 사용한다.var unionType: string | number;위 예제의 unionType에는 string과 number 타입의 값을 할당할 수 있다.">
     <meta itemprop="datePublished" content="April 02, 2019">
     
 
@@ -260,7 +260,7 @@
 
 
 
-  최대 1 분 소요
+  2 분 소요
 </p>
           
         </header>
@@ -268,15 +268,101 @@
 
       <section class="page__content" itemprop="text">
         
-        <h2 id="공용체union">공용체(Union)</h2>
-<p>2개 이상의 타입을 조합하는 표현식.
+        <h3 id="공용체union">공용체(Union)</h3>
+<p>2개 이상의 타입을 조합하는 표현식.<br />
 공용체는 <code class="highlighter-rouge">파이프 기호(|)</code>를 사용한다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">unionType</span><span class="p">:</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">number</span><span class="p">;</span>
+</code></pre></div></div>
+<p>위 예제의 unionType에는 string과 number 타입의 값을 할당할 수 있다.</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+<h4 id="타입가드">타입가드</h4>
+<p>공용체 타입을 사용하는 경우, 컴파일러는 타입이 섞여 동작하지 않도록 강타입 규칙을 적용한다.<br />
+타입가드는 코드 안에서 변수의 타입을 확인해 타입을 보장하는 방법이다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">addWithUnion</span><span class="p">(</span>
+    <span class="nx">arg1</span><span class="p">:</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">number</span><span class="p">,</span>
+    <span class="nx">arg2</span><span class="p">:</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">number</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">arg1</span> <span class="o">+</span> <span class="nx">arg2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>2개의 인자를 받아 더하는 함수이다.<br />
+arg1과 arg2는 공용체 타입으로 문자열이나 숫자가 될 수 있다. 하지만 코드를 컴파일하면 다음 오류가 발생한다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>errer: Operator '+' cannot be applied to types 'string | number'and 'string | number'.
+</code></pre></div></div>
+
+<p>타입가드를 통해 타입에 따른 동작을 보장해 주도록 하자.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">addWithUnion</span><span class="p">(</span>
+    <span class="nx">arg1</span><span class="p">:</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">number</span><span class="p">,</span>
+    <span class="nx">arg2</span><span class="p">:</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">number</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">arg1</span> <span class="o">===</span> <span class="s1">'string'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">arg1</span> <span class="o">+</span> <span class="nx">arg2</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">arg1</span> <span class="o">===</span> <span class="s1">'number'</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">arg2</span> <span class="o">===</span> <span class="s1">'number'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">arg1</span> <span class="o">+</span> <span class="nx">arg2</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">arg1</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="nx">arg2</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>동일한 함수에 2개의 if문을 추가했다.<br />
+첫 번째 if는 arg1이 문자열인지 확인하고, if문 안쪽에서 문자열로 취급한다. 두 번째 if는 두 개의 인자가 숫자인지 확인하고, if문 안쪽에서 숫자로 취급한다.<br />
+<em>이 2개의 if가 타입가드다.</em><br />
+마지막 return에서는 arg1과 arg2의 toString 함수를 호출한다.<br />
+모든 자바스크립트 기본 타입은 toString 함수를 갖고 있어서 실질적으로 두 인자를 모두 문자열로 취급하여 결과를 반환한다.</p>
+
+<h4 id="타입-별명">타입 별명</h4>
+<p>공용체 타입을 쓰다 보면 어떤 타입을 사용했는지 기억하기 어려울 때도 있다.<br />
+이런 문제를 해결하기 위해 공용체 타입에 특별한 이름을 부여하는 타입 별명 개념을 도입했다.<br />
+타입 별명은 <code class="highlighter-rouge">type</code> 키워드로 선언해 일반 타입처럼 사용할 수 있다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">type</span> <span class="nx">StringOrNumber</span> <span class="o">=</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">number</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">addWithAlias</span><span class="p">(</span>
+    <span class="nx">arg1</span><span class="p">:</span> <span class="nx">StringOrNumber</span><span class="p">,</span>
+    <span class="nx">arg2</span><span class="p">:</span> <span class="nx">StringOrNumber</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>타입 별명은 함수 시그니처에도 사용할 수 있다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">type</span> <span class="nx">CallbackWithString</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">void</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">usingCallbackWithString</span><span class="p">(</span>
+    <span class="nx">callback</span><span class="p">:</span> <span class="nx">CallbackWithString</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">callback</span><span class="p">(</span><span class="s1">'this is a string'</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="null과-undefined">Null과 undefined</h3>
+<p>자바스크립트에서 변수를 선언만 하고 값을 할당하지 않은 채 조회하면 <code class="highlighter-rouge">undefined</code>가 반환된다.<br />
+<code class="highlighter-rouge">null</code>은 현재 범위에서 변수를 알고 있고, 값이 없는 경우이다.</p>
+
+<h3 id="객체-나머지-전개object-rest-and-spread">객체 나머지, 전개(Object rest and spread)</h3>
+<p>기본 자바스크립트 객체를 사용할 때 객채의 속성을 다른 객체로 복사하거나, 다양한 객체를 섞거나, 일치시키는 작업이 자주 필요하다.<br />
+이런 필요성을 위해 타입스크립트는 ES7에 제안된 객체 나머지(rest)와 전개(spread) 구문을 도입했다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">firstObj</span> <span class="o">=</span> <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'firstObj'</span><span class="p">};</span>
+<span class="kd">let</span> <span class="nx">secondObj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">firstObj</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`secondObj.id: </span><span class="p">${</span><span class="nx">secondObj</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`secondObj.name: </span><span class="p">${</span><span class="nx">secondObj</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+</code></pre></div></div>
+<p>해당 문법을 사용해 firstObj의 모든 속성을 secondObj로 복사한다.
+콘솔 결과</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>secondObj.id: 1
+secondObj.name: firstObj
+</code></pre></div></div>
+<p>여러 개의 객체를 조합할 수도 있다.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">nameObj</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s1">'nameObj'</span><span class="p">};</span>
+<span class="kd">let</span> <span class="nx">idObj</span> <span class="o">=</span> <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">};</span>
+
+<span class="kd">let</span> <span class="nx">obj3</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">nameObj</span><span class="p">,</span> <span class="p">...</span><span class="nx">idObj</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`obj3.id: </span><span class="p">${</span><span class="nx">obj3</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`obj3.name: </span><span class="p">${</span><span class="nx">obj3</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+</code></pre></div></div>
+<p>실행 결과는 다음과 같다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>obj3.id: 2
+obj3.name: nameObj
+</code></pre></div></div>
+<p><strong>나머지와 전개 문법은 속성 복사를 점진적으로 적용한다.  두 객체가 같은 이름의 속성을 갖고 있을 경우, 마지막에 지정된 속성값이 우선된다.</strong></p>
 
         
       </section>
