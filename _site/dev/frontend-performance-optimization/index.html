@@ -1,0 +1,674 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.15.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>프론트엔드 성능 최적화 - wererewe 기술 블로그</title>
+<meta name="description" content="브라우저 렌더링 과정파싱 &gt; 스타일 &gt; 레이아웃(=리플로우) &gt; 페인트 &gt; 합성 &amp; 렌더 ">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko">
+<meta property="og:site_name" content="wererewe 기술 블로그">
+<meta property="og:title" content="프론트엔드 성능 최적화">
+<meta property="og:url" content="http://localhost:4000/dev/frontend-performance-optimization/">
+
+
+  <meta property="og:description" content="브라우저 렌더링 과정파싱 &gt; 스타일 &gt; 레이아웃(=리플로우) &gt; 페인트 &gt; 합성 &amp; 렌더 ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2019-04-25T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/dev/frontend-performance-optimization/">
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "wererewe",
+      "url": "http://localhost:4000",
+      "sameAs": null
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="wererewe 기술 블로그 Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">wererewe 기술 블로그</a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/categories/list" >Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/" >Home</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">kyungjin</h3>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Angular, Typescript, ES6
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Seoul, Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://github.com/wererewe" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="프론트엔드 성능 최적화">
+    <meta itemprop="description" content="브라우저 렌더링 과정파싱 &gt; 스타일 &gt; 레이아웃(=리플로우) &gt; 페인트 &gt; 합성 &amp; 렌더 ">
+    <meta itemprop="datePublished" content="April 25, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">프론트엔드 성능 최적화
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 분 소요
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h3 id="브라우저-렌더링-과정">브라우저 렌더링 과정</h3>
+<p>파싱 &gt; 스타일 &gt; 레이아웃(=리플로우) &gt; 페인트 &gt; 합성 &amp; 렌더<br />
+ <img src="/assets/img/render.png" alt="브라우저 렌더링 과정" /></p>
+
+<h4 id="파싱">파싱</h4>
+<p>다운받은 HTML을 파싱하여 DOM 트리 구축, 인라인 CSS나 다운받은 CSS를 해석해 CSSOM 트리를 구축</p>
+
+<h4 id="스타일">스타일</h4>
+<p>렌더트리 생성. ( 렌더트리를 만드는 소스는 Dom 트리와 CSSOM 트리 )<br />
+결과물: render layer, GPU 처리가 필요하면 graphic layer도 만들어짐<br />
+GPU 처리가 필요한 경우</p>
+<ul>
+  <li>CSS 3d Transform(translate 3d, preserve-3d 등)</li>
+  <li>CSS 애니메이션 함수, 필터 함수</li>
+  <li>video, canvas</li>
+  <li>등!</li>
+</ul>
+
+<h4 id="레이아웃리플로우">레이아웃(=리플로우)</h4>
+<p>브라우저의 뷰포트 안에서 노드가 가져야 할 정확한 위치와 크기를 계산하는 과정.<br />
+(ex, width: 50% 를 실제 뷰포트에 해당하는 ‘픽셀’로 계산함)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt; ABCED &lt;/p&gt;
+</code></pre></div></div>
+<p>위 코드를 표시하기 위한 과정<br />
+2D 그래픽을 렌더링 (크로미늄에서는 SKIA 라이브러리)<br />
+폰트엔진이 각 문자에 대한 크기를 계산<br />
+각 글자마다 (x,y) 좌표를 지정<br />
+렌더링 과정 중 가장 비용이 큰 작업</p>
+
+<h4 id="페인트래스터라이징">페인트(=래스터라이징)</h4>
+<p>레이아웃에서 계산된 값을 이용해 렌더트리의 각 노드를 화면 상의 실제 픽셀로 변환함.<br />
+한 장의 레이어로 메모리 공간에 그려놓는 과정.</p>
+<h4 id="합성--렌더">합성 &amp; 렌더</h4>
+<p>페인트 된 레이어들을 합성(composite)하여 스크린을 업데이트<br />
+CSS Transform 속성은 이 과정에서 동작함.</p>
+
+<h3 id="렌더링-최적화란">렌더링 최적화란?</h3>
+<p>디스플레이는 60fps로 화면을 그림. 그러므로, 웹페이지 렌더링 최적화란 브라우저가 1초에 60번 렌더링 할 수 있게 하는 것.</p>
+
+<p>렌더링 관련 알면 좋은 단어들</p>
+<ul>
+  <li>FCP(First Contentful Pain): 렌더링된 첫 번째 비트가 보여지는 시점.</li>
+  <li>FMP(First Meaningful Paint): 주요 컨텐츠가 화면에 보여지는 시점.</li>
+  <li>Critical Rendering Path가 모드 로드됨</li>
+  <li><a href="https://docs.google.com/document/d/1BR94tJdZLsin5poeet0XoTW60M0SjvOJQttKT-JK8HI/view">First Interactive and Consistently Interactive: 측정 방법 연구</a>
+위 페이퍼에 따르면 FMP는 서비스 마다 다른 의미를 가지는데, 검색 사이트에서는 검색 결과가, 29CM과 같은 e-commerce에서는 이미지가 보여지는 시점이 주요 측정 포인트라고 함</li>
+  <li>DCL: DOMContentLoaded 이벤트</li>
+  <li>L: Load 이벤트</li>
+  <li>FI: First Interactive, First CPU Idle
+    <ul>
+      <li>전부는 아니지만 대부분의 UI가 움직임.</li>
+      <li>사용자의 입력에 일정 시간 이내에 동작함</li>
+      <li>부드럽지 않게 움직일 수 있음</li>
+      <li>UI 동작에 필요한 JS 로딩이 마무리 되었음</li>
+    </ul>
+  </li>
+  <li>TTI(Time to interactive):
+    <ul>
+      <li>최소한 메인스레드가 50ms 이내의 컨트롤을 확보하여 부드러운 반응이 가능함</li>
+      <li>네트워크에서 다운로드 되고있는 리소스가 2개 이하</li>
+    </ul>
+  </li>
+  <li>뭔가 진행되고 있구나: FP, FCP</li>
+  <li>이제 원하는 내용을 읽을 수 있다: FMP</li>
+  <li>이제 동작하는구나: TTI</li>
+</ul>
+
+<h3 id="간단한-최적화-팁">간단한 최적화 팁</h3>
+<ol>
+  <li>애니메이션이 들어간 노드는 position: fixed 또는 absolute로 지정한다.
+    <ul>
+      <li>애니메이션은 Layout 비용이 매우 크다. fixed나 absolute로 전체 레이아웃과 분리해주면 애니메이션이 필요한 노드만 계산하게 된다. 그렇지 않을 경우 전체 노드를 재계산 하기 때문에 많은 비용이 들어 느려지게 됨.</li>
+    </ul>
+  </li>
+  <li>초기 렌더링에 쓰이지 않는 스크립트는 defer, async 속성을 명시하여 Blocking을 방지
+    <ol>
+      <li>defer는 IE10 &gt;= 지원</li>
+      <li><a href="https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html">async vs defer attributes</a></li>
+    </ol>
+  </li>
+  <li>link rel preload 사용</li>
+  <li>네트워크 요청 줄이기
+    <ol>
+      <li>중복되거나 불필요 파일 제거</li>
+      <li>webpack을 이용한 번들링</li>
+      <li>이미지 Sprites 사용</li>
+    </ol>
+  </li>
+  <li>불필요 데이터 제거
+    <ol>
+      <li>간결한 css selector 사용
+        <ol>
+          <li>selector가 길어질수록 비용이 큼</li>
+        </ol>
+      </li>
+      <li>불필요한 css rule 제거</li>
+      <li>오버스펙 라이브러리 지양 (대표적으로 lodash)</li>
+    </ol>
+  </li>
+  <li>그 외
+    <ol>
+      <li>DOM 요소 추가 시에도 appendChild를 여러 번 하면 리플로우 여러 번 발생 → innerHTMl 사용</li>
+      <li>DOM 깊이 최소화 (태그의 중첩을 최소화)</li>
+      <li>가능한 하위 노드의 스타일을 변경</li>
+    </ol>
+  </li>
+</ol>
+
+<h4 id="메모리-관리">메모리 관리</h4>
+<ul>
+  <li>의도하지 않은 전역 변수 사용</li>
+  <li>잊혀진 타이머</li>
+  <li>참조된 DOM Node 삭제
+    <ul>
+      <li>메모리 누수</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">elements</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">button</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'button'</span><span class="p">),</span>
+    <span class="na">image</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'image'</span><span class="p">),</span>
+    <span class="na">text</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'text'</span><span class="p">)</span>
+<span class="p">};</span>
+ 
+ 
+<span class="kd">function</span> <span class="nx">doStuff</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">elements</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'http://some.url/image'</span><span class="p">;</span>
+    <span class="nx">elements</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">elements</span><span class="p">.</span><span class="nx">text</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+ 
+ 
+<span class="kd">function</span> <span class="nx">removeButton</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'button'</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>removeButton()을 수행할 경우 ‘#button’은 삭제되지만 ‘#button’에 대한 참조(elements.button)는 남아 있게 됨<br />
+이 때문에 ‘#button’은 GC되지 않음</p>
+
+<p><strong>해결 방법</strong><br />
+removeButton() 함수에서 #button 삭제 시 참조도 같이 삭제함</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">removeButton</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'button'</span><span class="p">));</span>
+    <span class="nx">elements</span><span class="p">.</span><span class="nx">button</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>클로저 사용에 따른 누수</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#blog" class="page__taxonomy-item" rel="tag">blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#frontend" class="page__taxonomy-item" rel="tag">frontend</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#dev" class="page__taxonomy-item" rel="tag">dev</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2019-04-25T00:00:00+09:00">April 25, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C+%EC%84%B1%EB%8A%A5+%EC%B5%9C%EC%A0%81%ED%99%94%20http%3A%2F%2Flocalhost%3A4000%2Fdev%2Ffrontend-performance-optimization%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdev%2Ffrontend-performance-optimization%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdev%2Ffrontend-performance-optimization%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/dev/typescript-1/" class="pagination--pager" title="TypeScript - 고급 타입
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+
+    <div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://wererewe.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/dev/typescript-1/" rel="permalink">TypeScript - 고급 타입
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 분 소요
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">공용체(Union)
+2개 이상의 타입을 조합하는 표현식.
+공용체는 파이프 기호(|)를 사용한다.
+var unionType: string | number;
+
+위 예제의 unionType에는 string과 number 타입의 값을 할당할 수 있다.
+
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/dev/initial-post/" rel="permalink">첫 포스팅
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  최대 1 분 소요
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">처음 써본당!
+This is an &lt;h1&gt; tag
+This is an &lt;h2&gt; tag
+
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://localhost:4000/jekyll/update/welcome-to-jekyll/" rel="permalink">Welcome to Jekyll!
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  최대 1 분 소요
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://github.com/wererewe" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 wererewe. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js" integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>

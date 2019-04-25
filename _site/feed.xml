@@ -1,4 +1,154 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-24T18:46:27+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">wererewe 기술 블로그</title><subtitle>공부용 블로그</subtitle><author><name>kyungjin</name></author><entry><title type="html">첫 포스팅</title><link href="http://localhost:4000/dev/initial-post/" rel="alternate" type="text/html" title="첫 포스팅" /><published>2019-04-02T00:00:00+09:00</published><updated>2019-04-02T00:00:00+09:00</updated><id>http://localhost:4000/dev/initial-post</id><content type="html" xml:base="http://localhost:4000/dev/initial-post/">&lt;p&gt;처음 써본당!&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-25T17:17:14+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">wererewe 기술 블로그</title><subtitle>공부용 블로그</subtitle><author><name>kyungjin</name></author><entry><title type="html">프론트엔드 성능 최적화</title><link href="http://localhost:4000/dev/frontend-performance-optimization/" rel="alternate" type="text/html" title="프론트엔드 성능 최적화" /><published>2019-04-25T00:00:00+09:00</published><updated>2019-04-25T00:00:00+09:00</updated><id>http://localhost:4000/dev/frontend-performance-optimization</id><content type="html" xml:base="http://localhost:4000/dev/frontend-performance-optimization/">&lt;h3 id=&quot;브라우저-렌더링-과정&quot;&gt;브라우저 렌더링 과정&lt;/h3&gt;
+&lt;p&gt;파싱 &amp;gt; 스타일 &amp;gt; 레이아웃(=리플로우) &amp;gt; 페인트 &amp;gt; 합성 &amp;amp; 렌더&lt;br /&gt;
+ &lt;img src=&quot;/assets/img/render.png&quot; alt=&quot;브라우저 렌더링 과정&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;파싱&quot;&gt;파싱&lt;/h4&gt;
+&lt;p&gt;다운받은 HTML을 파싱하여 DOM 트리 구축, 인라인 CSS나 다운받은 CSS를 해석해 CSSOM 트리를 구축&lt;/p&gt;
+
+&lt;h4 id=&quot;스타일&quot;&gt;스타일&lt;/h4&gt;
+&lt;p&gt;렌더트리 생성. ( 렌더트리를 만드는 소스는 Dom 트리와 CSSOM 트리 )&lt;br /&gt;
+결과물: render layer, GPU 처리가 필요하면 graphic layer도 만들어짐&lt;br /&gt;
+GPU 처리가 필요한 경우&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CSS 3d Transform(translate 3d, preserve-3d 등)&lt;/li&gt;
+  &lt;li&gt;CSS 애니메이션 함수, 필터 함수&lt;/li&gt;
+  &lt;li&gt;video, canvas&lt;/li&gt;
+  &lt;li&gt;등!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;레이아웃리플로우&quot;&gt;레이아웃(=리플로우)&lt;/h4&gt;
+&lt;p&gt;브라우저의 뷰포트 안에서 노드가 가져야 할 정확한 위치와 크기를 계산하는 과정.&lt;br /&gt;
+(ex, width: 50% 를 실제 뷰포트에 해당하는 ‘픽셀’로 계산함)&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;p&amp;gt; ABCED &amp;lt;/p&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;위 코드를 표시하기 위한 과정&lt;br /&gt;
+2D 그래픽을 렌더링 (크로미늄에서는 SKIA 라이브러리)&lt;br /&gt;
+폰트엔진이 각 문자에 대한 크기를 계산&lt;br /&gt;
+각 글자마다 (x,y) 좌표를 지정&lt;br /&gt;
+렌더링 과정 중 가장 비용이 큰 작업&lt;/p&gt;
+
+&lt;h4 id=&quot;페인트래스터라이징&quot;&gt;페인트(=래스터라이징)&lt;/h4&gt;
+&lt;p&gt;레이아웃에서 계산된 값을 이용해 렌더트리의 각 노드를 화면 상의 실제 픽셀로 변환함.&lt;br /&gt;
+한 장의 레이어로 메모리 공간에 그려놓는 과정.&lt;/p&gt;
+&lt;h4 id=&quot;합성--렌더&quot;&gt;합성 &amp;amp; 렌더&lt;/h4&gt;
+&lt;p&gt;페인트 된 레이어들을 합성(composite)하여 스크린을 업데이트&lt;br /&gt;
+CSS Transform 속성은 이 과정에서 동작함.&lt;/p&gt;
+
+&lt;h3 id=&quot;렌더링-최적화란&quot;&gt;렌더링 최적화란?&lt;/h3&gt;
+&lt;p&gt;디스플레이는 60fps로 화면을 그림. 그러므로, 웹페이지 렌더링 최적화란 브라우저가 1초에 60번 렌더링 할 수 있게 하는 것.&lt;/p&gt;
+
+&lt;p&gt;렌더링 관련 알면 좋은 단어들&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;FCP(First Contentful Pain): 렌더링된 첫 번째 비트가 보여지는 시점.&lt;/li&gt;
+  &lt;li&gt;FMP(First Meaningful Paint): 주요 컨텐츠가 화면에 보여지는 시점.&lt;/li&gt;
+  &lt;li&gt;Critical Rendering Path가 모드 로드됨&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.google.com/document/d/1BR94tJdZLsin5poeet0XoTW60M0SjvOJQttKT-JK8HI/view&quot;&gt;First Interactive and Consistently Interactive: 측정 방법 연구&lt;/a&gt;
+위 페이퍼에 따르면 FMP는 서비스 마다 다른 의미를 가지는데, 검색 사이트에서는 검색 결과가, 29CM과 같은 e-commerce에서는 이미지가 보여지는 시점이 주요 측정 포인트라고 함&lt;/li&gt;
+  &lt;li&gt;DCL: DOMContentLoaded 이벤트&lt;/li&gt;
+  &lt;li&gt;L: Load 이벤트&lt;/li&gt;
+  &lt;li&gt;FI: First Interactive, First CPU Idle
+    &lt;ul&gt;
+      &lt;li&gt;전부는 아니지만 대부분의 UI가 움직임.&lt;/li&gt;
+      &lt;li&gt;사용자의 입력에 일정 시간 이내에 동작함&lt;/li&gt;
+      &lt;li&gt;부드럽지 않게 움직일 수 있음&lt;/li&gt;
+      &lt;li&gt;UI 동작에 필요한 JS 로딩이 마무리 되었음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;TTI(Time to interactive):
+    &lt;ul&gt;
+      &lt;li&gt;최소한 메인스레드가 50ms 이내의 컨트롤을 확보하여 부드러운 반응이 가능함&lt;/li&gt;
+      &lt;li&gt;네트워크에서 다운로드 되고있는 리소스가 2개 이하&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;뭔가 진행되고 있구나: FP, FCP&lt;/li&gt;
+  &lt;li&gt;이제 원하는 내용을 읽을 수 있다: FMP&lt;/li&gt;
+  &lt;li&gt;이제 동작하는구나: TTI&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;간단한-최적화-팁&quot;&gt;간단한 최적화 팁&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;애니메이션이 들어간 노드는 position: fixed 또는 absolute로 지정한다.
+    &lt;ul&gt;
+      &lt;li&gt;애니메이션은 Layout 비용이 매우 크다. fixed나 absolute로 전체 레이아웃과 분리해주면 애니메이션이 필요한 노드만 계산하게 된다. 그렇지 않을 경우 전체 노드를 재계산 하기 때문에 많은 비용이 들어 느려지게 됨.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;초기 렌더링에 쓰이지 않는 스크립트는 defer, async 속성을 명시하여 Blocking을 방지
+    &lt;ol&gt;
+      &lt;li&gt;defer는 IE10 &amp;gt;= 지원&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html&quot;&gt;async vs defer attributes&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;link rel preload 사용&lt;/li&gt;
+  &lt;li&gt;네트워크 요청 줄이기
+    &lt;ol&gt;
+      &lt;li&gt;중복되거나 불필요 파일 제거&lt;/li&gt;
+      &lt;li&gt;webpack을 이용한 번들링&lt;/li&gt;
+      &lt;li&gt;이미지 Sprites 사용&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;불필요 데이터 제거
+    &lt;ol&gt;
+      &lt;li&gt;간결한 css selector 사용
+        &lt;ol&gt;
+          &lt;li&gt;selector가 길어질수록 비용이 큼&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;불필요한 css rule 제거&lt;/li&gt;
+      &lt;li&gt;오버스펙 라이브러리 지양 (대표적으로 lodash)&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;그 외
+    &lt;ol&gt;
+      &lt;li&gt;DOM 요소 추가 시에도 appendChild를 여러 번 하면 리플로우 여러 번 발생 → innerHTMl 사용&lt;/li&gt;
+      &lt;li&gt;DOM 깊이 최소화 (태그의 중첩을 최소화)&lt;/li&gt;
+      &lt;li&gt;가능한 하위 노드의 스타일을 변경&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;메모리-관리&quot;&gt;메모리 관리&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;의도하지 않은 전역 변수 사용&lt;/li&gt;
+  &lt;li&gt;잊혀진 타이머&lt;/li&gt;
+  &lt;li&gt;참조된 DOM Node 삭제
+    &lt;ul&gt;
+      &lt;li&gt;메모리 누수&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'button'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'image'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'text'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+ 
+ 
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;doStuff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://some.url/image'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+ 
+ 
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;removeButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;removeChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'button'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;removeButton()을 수행할 경우 ‘#button’은 삭제되지만 ‘#button’에 대한 참조(elements.button)는 남아 있게 됨&lt;br /&gt;
+이 때문에 ‘#button’은 GC되지 않음&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;해결 방법&lt;/strong&gt;&lt;br /&gt;
+removeButton() 함수에서 #button 삭제 시 참조도 같이 삭제함&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;removeButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;removeChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'button'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;클로저 사용에 따른 누수&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>kyungjin</name></author><category term="blog" /><category term="frontend" /><summary type="html">브라우저 렌더링 과정 파싱 &amp;gt; 스타일 &amp;gt; 레이아웃(=리플로우) &amp;gt; 페인트 &amp;gt; 합성 &amp;amp; 렌더</summary></entry><entry><title type="html">첫 포스팅</title><link href="http://localhost:4000/dev/initial-post/" rel="alternate" type="text/html" title="첫 포스팅" /><published>2019-04-02T00:00:00+09:00</published><updated>2019-04-02T00:00:00+09:00</updated><id>http://localhost:4000/dev/initial-post</id><content type="html" xml:base="http://localhost:4000/dev/initial-post/">&lt;p&gt;처음 써본당!&lt;/p&gt;
 &lt;h1 id=&quot;this-is-an-h1-tag&quot;&gt;This is an &amp;lt;h1&amp;gt; tag&lt;/h1&gt;
 &lt;h2 id=&quot;this-is-an-h2-tag&quot;&gt;This is an &amp;lt;h2&amp;gt; tag&lt;/h2&gt;
 
