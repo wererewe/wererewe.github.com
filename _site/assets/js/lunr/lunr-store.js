@@ -18,4 +18,9 @@ var store = [{
         "excerpt":"브라우저 렌더링 과정 파싱 &gt; 스타일 &gt; 레이아웃(=리플로우) &gt; 페인트 &gt; 합성 &amp; 렌더 파싱 다운받은 HTML을 파싱하여 DOM 트리 구축, 인라인 CSS나 다운받은 CSS를 해석해 CSSOM 트리를 구축 스타일 렌더트리 생성. ( 렌더트리를 만드는 소스는 Dom 트리와 CSSOM 트리 ) 결과물: render layer, GPU 처리가 필요하면 graphic layer도 만들어짐...","categories": ["dev"],
         "tags": ["blog","frontend"],
         "url": "http://localhost:4000/dev/frontend-performance-optimization/",
+        "teaser":null},{
+        "title": "자바스크립트 promise, async/await",
+        "excerpt":"promise 자바스크립트 비동기 처리에 사용되는 객체 비동기 처리 특정 코드의 실행이 완료될 때까지 기다리지 않고 다음 코드를 먼저 수행하는 자바스크립트의 특성 주로 서버에서 받아온 데이터에 사용 구문 new Promise(executor) 매개변수 executor resolve 및 reject 인수를 전달할 실행 함수. 실행 함수는 resolve와 reject 함수를 받아 실행. resolve: 비동기 작업이 모두 끝난...","categories": ["dev"],
+        "tags": ["blog","frontend","javascript"],
+        "url": "http://localhost:4000/dev/javascript-1/",
         "teaser":null}]
